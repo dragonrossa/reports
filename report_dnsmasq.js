@@ -1,12 +1,19 @@
-//mailer created for Synology NAS
-//instead of yumm we have synopkg for installing packages and I created mailer that tails last 
-//150 lines to txt file with todays date and sends it to my mail at 
-//23:40 h every day
+//mailer created for Synology NAS for dnsmasq
+//******************//
+//What is Dndsmasq?
 
-//reason - restarts of packages, when and why did they restartd
-//did it because of MariaDB unusual acting (in meanwhile removed MariaDB)
-//found a bug - when you delete MariaDB and do not delete databases it stores the whole server in Synology
-//after that you install fresh instance and got second server, wonder why
+// Dnsmasq provides network infrastructure for small networks: 
+//DNS, DHCP, router advertisement and network boot. 
+// It is designed to be lightweight and have a small footprint,
+// suitable for resource constrained routers and firewalls. 
+// It has also been widely used for tethering on smartphones and
+// portable hotspots, and to support virtual networking in 
+// virtualisation frameworks. Supported platforms include Linux 
+//(with glibc and uclibc), Android, *BSD, and Mac OS X.
+// Dnsmasq is included in most Linux distributions and the
+// ports systems of FreeBSD, OpenBSD and NetBSD. 
+// Dnsmasq provides full IPv6 support.
+
 
 
 const nodemailer = require("nodemailer");
