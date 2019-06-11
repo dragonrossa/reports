@@ -15,13 +15,12 @@
 // Dnsmasq provides full IPv6 support.
 
 
-
 const nodemailer = require("nodemailer");
 let date = require('date-and-time');
 let shell = require('shelljs');
 
 var CronJob = require('cron').CronJob;
-new CronJob('40 23 * * *', function() {
+new CronJob('30 23 * * *', function() {
 
 
 
@@ -34,6 +33,7 @@ new CronJob('40 23 * * *', function() {
             pass: "mypassword" // generated ethereal password
         }
     });
+    
 
 
 
@@ -44,8 +44,8 @@ let an_hour_ago = date.addHours(now, +2);
 let vrijeme = date.format(an_hour_ago, 'hh:mm:ss', true);
 
 
-
- shell.tail({'-n': 150}, '/var/log/synopkg.log').to('/volume1/rosana/reports/'+datum+".txt");
+shell.grep('--', datum, '/var/log/dnsmasq.log').to('/volume1/rosana/reports/'+datum+"_dnsmasq.txt"); 
+ 
 
 
 async function main() {
@@ -57,7 +57,7 @@ async function main() {
            
 
             function mySubject() {
-                return "(JPM-SERVER) Synopkg report for " + datum;
+                return "(SERVER) Dnsmasq report for " + datum;
 
 
             }
@@ -70,16 +70,16 @@ async function main() {
             from: '"Admin" <user@domain.com>',
             attachments: [
                 {   // utf-8 string as an attachment
-                    path: '/volume1/rosana/reports/'+ datum+".txt"
+                    path: '/volume1/rosana/reports/'+ datum+"_dnsmasq.txt"
                 }
             ]
         };
 
 
-            mailOptions.to = "r.duga@concepts.hr";
+        mailOptions.to = "me@domain.com";
             mailOptions.subject = mySubject();
-            mailOptions.html = "Hello, this is your daily Synopkg report for today. <br><br> " + datum + " " + vrijeme + "<br><br> Admin ";
-            mailOptions.text = "Hello, this is your daily Synopkg report for today. <br><br> " + datum + " " + vrijeme + "<br><br> Admin ";
+            mailOptions.html = "Hello, this is your daily Dnsmasq report for today. <br><br> " + datum + " " + vrijeme + "<br><br> Admin ";
+            mailOptions.text = "Hello, this is your daily Dnsmasq report for today. <br><br> " + datum + " " + vrijeme + "<br><br> Admin ";
             mailOptions.priority = 'high';
 
 
